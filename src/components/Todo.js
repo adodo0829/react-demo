@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import "../styles/todo.css";
+import TodoItem from "./TodoItem";
 
 export default class Todo extends Component {
   constructor(props) {
@@ -28,6 +29,9 @@ export default class Todo extends Component {
             className="input"
             value={this.state.inputValue}
             onChange={this.handleChange.bind(this)}
+            // ref转发: ref与当前组件DOM实例绑定, 获取DOM, 数据更新,获取新dom要在vdom更新更新后才能获取
+            // setState的第二个参数回调, 类似vue的nextTick()回调
+            ref={(ele) => { this.myInput = ele }}
           ></input>
           <button onClick={this.add.bind(this)}>新增</button>
         </div>
@@ -36,14 +40,18 @@ export default class Todo extends Component {
           {/* 列表渲染, 返回JSX */}
           {this.state.dataList.map((item, index) => {
             return (
-            	<li key={index} onClick={this.delete.bind(this, index)}>
-								{ index % 2 === 0 ? item : item+' odd' }
-							</li>
+              // 父组件直接给子组件传一个方法
+              <TodoItem content={item} key={index} index={index} deleteTodoItem={this.delete.bind(this)}></TodoItem>
             );
           })}
         </ul>
       </Fragment>
     );
+  }
+
+  // lifecycle
+  componentDidMount() {
+    this.focus()
   }
 
   handleChange(e) {
@@ -65,5 +73,9 @@ export default class Todo extends Component {
     this.setState({
       dataList: temp,
     });
+  }
+
+  focus() {
+    this.myInput.focus()
   }
 }

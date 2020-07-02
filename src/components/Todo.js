@@ -14,6 +14,8 @@ export default class Todo extends Component {
 
   // 返回一段jsx
   render() {
+    console.log('子组件render---todo render...')
+
     return (
       <Fragment>
         {
@@ -51,6 +53,7 @@ export default class Todo extends Component {
 
   // lifecycle
   componentDidMount() {
+    console.log('todo mounting...')
     this.focus()
   }
 

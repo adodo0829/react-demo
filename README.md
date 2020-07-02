@@ -342,3 +342,29 @@ componentDidMount() {
   // 可调用setState
 }
 ```
+
+- Updating
+
+更新阶段: 当组件的 props 或 state 发生变化时会触发更新
+
+```js
+// 顺序如下:
+static getDerivedStateFromProps()
+
+// 当 props 或 state 发生变化时，shouldComponentUpdate() 会在渲染执行之前被调用
+  // 将this.props 与 nextProps 以及 this.state 与nextState 进行比较
+shouldComponentUpdate()
+
+render()
+getSnapshotBeforeUpdate()
+componentDidUpdate()    // 组件被更新完成后触发。页面中产生了新的DOM的元素，可以进行DOM操作
+```
+
+- Unmounting
+
+销毁阶段: 组件实例被销毁
+
+```js
+componentWillUnmount() // 组件卸载及销毁之前直接调用
+// 可以进行一些清理操作，例如清理定时器，取消Redux的订阅事件等
+```

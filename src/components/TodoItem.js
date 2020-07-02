@@ -20,8 +20,8 @@ export default class TodoItem extends Component {
   // 当 props 或 state 发生变化时，shouldComponentUpdate() 会在渲染执行之前被调用
   // 将this.props 与 nextProps 以及 this.state 与nextState 进行比较
   shouldComponentUpdate(nextProps, nextState) {
-	// 优化手段
-	return nextProps.content !== this.props.content
+    // 优化手段
+    return nextProps.content !== this.props.content;
   }
 
   render() {

@@ -1,3 +1,76 @@
 .input {
-    border: 1px solid red;
+  border: 1px solid red;
+}
+
+.show {
+  /* opacity: 1;
+    transition: all 1s; */
+  animation: show-elem 2s ease-in-out forwards;
+}
+
+.hide {
+  /* opacity: 0;
+    transition: all 1s; */
+  animation: hide-elem 2s ease-in-out forwards;
+}
+
+@keyframes show-elem {
+  0% {
+    opacity: 0;
+    color: yellow;
+  }
+  50% {
+    opacity: 0.5;
+    color: red;
+  }
+  100% {
+    opacity: 1;
+    color: green;
+  }
+}
+
+@keyframes hide-elem {
+  0% {
+    opacity: 1;
+    color: yellow;
+  }
+  50% {
+    opacity: 0.5;
+    color: red;
+  }
+  100% {
+    opacity: 0;
+    color: green;
+  }
+}
+
+/* 过渡动画 */
+/* xxx-enter: 进入（入场）前的CSS样式；
+xxx-enter-active:进入动画直到完成时之前的CSS样式;
+xxx-enter-done:进入完成时的CSS样式;
+xxx-exit:退出（出场）前的CSS样式;
+xxx-exit-active:退出动画知道完成时之前的的CSS样式。
+xxx-exit-done:退出完成时的CSS样式。 */
+.fade-enter {
+  opacity: 0;
+  transform: translateX(100px);
+}
+.fade-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 1000ms;
+}
+.fade-enter-done {
+  transform: translateX(0);
+  opacity: 1;
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 2000ms;
+}
+.fade-exit-done {
+  opacity: 0;
 }

@@ -194,7 +194,9 @@ export default class Todo extends Component {
             onChange={this.handleChange.bind(this)}
             // ref转发: ref与当前组件DOM实例绑定, 获取DOM, 数据更新,获取新dom要在vdom更新更新后才能获取
             // setState的第二个参数回调, 类似vue的nextTick()回调
-            ref={(ele) => { this.myInput = ele }}
+            ref={(ele) => {
+              this.myInput = ele;
+            }}
           ></input>
           <button onClick={this.add.bind(this)}>新增</button>
         </div>
@@ -204,7 +206,12 @@ export default class Todo extends Component {
           {this.state.dataList.map((item, index) => {
             return (
               // 父组件直接给子组件传一个方法
-              <TodoItem content={item} key={index} index={index} deleteTodoItem={this.delete.bind(this)}></TodoItem>
+              <TodoItem
+                content={item}
+                key={index}
+                index={index}
+                deleteTodoItem={this.delete.bind(this)}
+              ></TodoItem>
             );
           })}
         </ul>
@@ -214,7 +221,7 @@ export default class Todo extends Component {
 
   // lifecycle
   componentDidMount() {
-    this.focus()
+    this.focus();
   }
 
   handleChange(e) {
@@ -239,7 +246,7 @@ export default class Todo extends Component {
   }
 
   focus() {
-    this.myInput.focus()
+    this.myInput.focus();
   }
 }
 
@@ -281,17 +288,18 @@ TodoItem.propTypes = {
 };
 ```
 
-## 6.React生命周期(4大阶段)
+## 6.React 生命周期(4 大阶段)
 
 生命周期阶段: [参考链接](https://zh-hans.reactjs.org/docs/react-component.html)
 <https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/>
+
 > init(初始化阶段) -> Mounting(挂载阶段) -> Updating(更新阶段) -> Unmounting(销毁阶段)
 
 生命周期函数(钩子): 某一个时刻组件会自动调用执行的函数
 
 - init
 
-init阶段叫初始化阶段, constructor构造器会执行, 初始化一些组件实例的属性或方法等
+init 阶段叫初始化阶段, constructor 构造器会执行, 初始化一些组件实例的属性或方法等
 
 ```js
 // 非必要函数: 如果不需要定义属性（props）和状态(state), 没必要显式声明
@@ -306,7 +314,7 @@ constructor(props) {
 
 - Mounting
 
-Mounting阶段叫挂载阶段，伴随着整个虚拟DOM的生成, 并插入到DOM文档
+Mounting 阶段叫挂载阶段，伴随着整个虚拟 DOM 的生成, 并插入到 DOM 文档
 
 ```js
 // 1. static getDerivedStateFromProps(props, state): 调用 render 方法之前调用，并且在初始挂载及后续更新时都会被调用。
@@ -352,7 +360,7 @@ componentDidMount() {
 static getDerivedStateFromProps()
 
 // 当 props 或 state 发生变化时，shouldComponentUpdate() 会在渲染执行之前被调用
-  // 将this.props 与 nextProps 以及 this.state 与nextState 进行比较
+// 将this.props 与 nextProps 以及 this.state 与nextState 进行比较
 shouldComponentUpdate()
 
 render()
@@ -365,6 +373,60 @@ componentDidUpdate()    // 组件被更新完成后触发。页面中产生了�
 销毁阶段: 组件实例被销毁
 
 ```js
-componentWillUnmount() // 组件卸载及销毁之前直接调用
+componentWillUnmount(); // 组件卸载及销毁之前直接调用
 // 可以进行一些清理操作，例如清理定时器，取消Redux的订阅事件等
+```
+
+## 7.组件和元素动画
+
+参考文档: <https://reactcommunity.org/react-transition-group/transition>
+
+```js
+// 单个元素
+render() {
+  return (
+    <div>
+      {/* <h2 className={ this.state.isShow ? 'show' : 'hide' } style={style}>BOSS: huhua</h2> */}
+      {/* 动画组件 */}
+      <CSSTransition
+        in={this.state.isShow}
+        timeout={2000}
+        classNames="fade"
+        // unmountOnExit会移除dom
+        unmountOnExit
+      >
+        <h2 style={style}>BOSS: huhua</h2>
+      </CSSTransition>
+      <button onClick={this.toggle}>单击切换状态</button>
+    </div>
+  );
+}
+
+// 列表
+ <ul>
+  {/* 列表渲染, 返回JSX */}
+  {/*
+    TransitionGroup: 包裹一组列表
+    CSSTransition: 列表项使用
+  */}
+  <TransitionGroup>
+    {this.state.dataList.map((item, index) => {
+      return (
+        // 父组件直接给子组件传一个方法
+        <CSSTransition
+          timeout={1000}
+          classNames="fade"
+          key={index+item}
+        >
+          <TodoItem
+            content={item}
+            key={index}
+            index={index}
+            deleteTodoItem={this.delete.bind(this)}
+          ></TodoItem>
+        </CSSTransition>
+      );
+    })}
+  </TransitionGroup>
+</ul>
 ```

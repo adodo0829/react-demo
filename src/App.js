@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Todo from './components/Todo'
+import Boss from './components/Boss'
+import './styles/app.css'
 
 export default class App extends Component {
   render() {
@@ -8,6 +10,7 @@ export default class App extends Component {
       <div>
         <h1>this is a todo list</h1>
         <Todo />
+        <Boss />
       </div>
     )
   }

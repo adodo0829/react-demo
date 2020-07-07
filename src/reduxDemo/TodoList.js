@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "antd/dist/antd.css";
 import { Input, Button, List } from "antd";
 import store from "../store/index";
-import { CHANGE_INPUT, ADD_LIST_ITEM, DELETE_ITEM } from '../store/actionType'
+// import { CHANGE_INPUT, ADD_LIST_ITEM, DELETE_ITEM } from '../store/actionType'
 import { ActionAddListItem, ActionChangInput, ActionDeleteItem } from '../store/actionCreator';
 
 // const data = [

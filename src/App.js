@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import Todo from './components/Todo'
-import Boss from './components/Boss'
+// import Boss from './components/Boss'
 import './styles/app.css'
-import TodoList from './reduxDemo/TodoList'
+// import TodoList from './reduxDemo/TodoList'
+import Count from "./hooks/Count";
 
 export default class App extends Component {
   render() {
@@ -10,9 +11,11 @@ export default class App extends Component {
     return (
       <div>
         <Todo />
-        <Boss />
+        {/* <Boss /> */}
         <hr></hr>
-        <TodoList />
+        {/* <TodoList /> */}
+        <Count />
+        <Count />
       </div>
     )
   }

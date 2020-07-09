@@ -23,6 +23,6 @@ app.get("/list", (req, res) => {
   res.json(Mock.mock(listAPI.getDataList(req)));
 });
 
-app.listen("3001", () => {
+app.listen("3003", () => {
   console.log("mock服务器启动ing中... port: 3001");
 });

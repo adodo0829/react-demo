@@ -78,7 +78,7 @@ export default class Todo extends Component {
     this.focus();
     // 请求接口
     axios
-      .get("http://localhost:3001/list")
+      .get("http://localhost:3003/list")
       .then((res) => {
         console.log(res.data.data.dataList);
         this.setState({
